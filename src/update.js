@@ -174,7 +174,7 @@ export const update = (action, state) =>
           return doNothing();
         }
 
-        function setIsOwnerBasedOnSomeCondition(connection, index) {
+        function firstConnectionIsOwner(connection, index) {
           const isFirstConnection = firstConnectionIndex === index;
           return {
             ...connection,
@@ -182,9 +182,7 @@ export const update = (action, state) =>
           };
         }
 
-        const connections = state.connections.map(
-          setIsOwnerBasedOnSomeCondition,
-        );
+        const connections = state.connections.map(firstConnectionIsOwner);
 
         const timerConnections = connections.filter(
           (c, index) => c.timerId === timerId && index !== firstConnectionIndex,
