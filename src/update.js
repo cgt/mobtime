@@ -184,9 +184,11 @@ export const update = (action, state) =>
 
         const connections = state.connections.map(firstConnectionIsOwner);
 
-        const timerConnections = connections.filter(
-          (c, index) => c.timerId === timerId && index !== firstConnectionIndex,
-        );
+        function connectionFilterPredicate(c, index) {
+          return c.timerId === timerId && index !== firstConnectionIndex;
+        }
+
+        const timerConnections = connections.filter(connectionFilterPredicate);
 
         return [
           {
