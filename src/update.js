@@ -168,19 +168,19 @@ export const update = (action, state) =>
           return [state, effects.none()];
         }
 
-        const targetIndex = findFirstConnectionToTimer();
-        const noConnectionsToTimer = targetIndex < 0;
+        const firstConnectionIndex = findFirstConnectionToTimer();
+        const noConnectionsToTimer = firstConnectionIndex < 0;
         if (noConnectionsToTimer) {
           return doNothing();
         }
 
         const connections = state.connections.map((connection, index) => ({
           ...connection,
-          isOwner: targetIndex === index ? true : connection.isOwner,
+          isOwner: firstConnectionIndex === index ? true : connection.isOwner,
         }));
 
         const timerConnections = connections.filter(
-          (c, index) => c.timerId === timerId && index !== targetIndex,
+          (c, index) => c.timerId === timerId && index !== firstConnectionIndex,
         );
 
         return [
@@ -189,7 +189,7 @@ export const update = (action, state) =>
             connections,
           },
           effects.batch([
-            SendOwnership(connections[targetIndex], true),
+            SendOwnership(connections[firstConnectionIndex], true),
             ...timerConnections.map(tc => SendOwnership(tc, false)),
           ]),
         ];
