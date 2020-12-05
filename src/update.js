@@ -165,7 +165,8 @@ export const update = (action, state) =>
         }
 
         const targetIndex = findFirstConnectionToTimer();
-        if (targetIndex < 0) {
+        const noConnectionsToTimer = targetIndex < 0;
+        if (noConnectionsToTimer) {
           return [state, effects.none()];
         }
 
