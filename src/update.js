@@ -189,7 +189,7 @@ export const update = (action, state) =>
         }
 
         function isNotFirstConnectionForTimer(index) {
-          return index !== firstConnectionIndex;
+          return !(index === firstConnectionIndex);
         }
 
         function connectionFilterPredicate(connection, index) {
