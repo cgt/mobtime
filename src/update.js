@@ -184,8 +184,8 @@ export const update = (action, state) =>
 
         const connections = state.connections.map(firstConnectionIsOwner);
 
-        function isConnectedToCurrentTimer(c) {
-          return c.timerId === timerId;
+        function isConnectedToCurrentTimer(connection) {
+          return connection.timerId === timerId;
         }
 
         function connectionFilterPredicate(connection, index) {
