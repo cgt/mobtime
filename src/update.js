@@ -164,10 +164,14 @@ export const update = (action, state) =>
           return state.connections.findIndex(c => c.timerId === timerId);
         }
 
+        function doNothing() {
+          return [state, effects.none()];
+        }
+
         const targetIndex = findFirstConnectionToTimer();
         const noConnectionsToTimer = targetIndex < 0;
         if (noConnectionsToTimer) {
-          return [state, effects.none()];
+          return doNothing();
         }
 
         const connections = state.connections.map((connection, index) => ({
