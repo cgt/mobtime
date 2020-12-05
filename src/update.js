@@ -175,9 +175,10 @@ export const update = (action, state) =>
         }
 
         function setIsOwnerBasedOnSomeCondition(connection, index) {
+          const isFirstConnection = firstConnectionIndex === index;
           return {
             ...connection,
-            isOwner: firstConnectionIndex === index ? true : connection.isOwner,
+            isOwner: isFirstConnection ? true : connection.isOwner,
           };
         }
 
