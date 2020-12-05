@@ -196,7 +196,7 @@ export const update = (action, state) =>
           return isConnectedToCurrentTimer(connection) && !isOwner(index);
         }
 
-        const timerConnections = connections.filter(
+        const timerConnectionsExceptOwner = connections.filter(
           isConnectedToCurrentAndIsNotOwner,
         );
 
@@ -207,7 +207,7 @@ export const update = (action, state) =>
           },
           effects.batch([
             SendOwnership(connections[firstConnectionIndex], true),
-            ...timerConnections.map(tc => SendOwnership(tc, false)),
+            ...timerConnectionsExceptOwner.map(tc => SendOwnership(tc, false)),
           ]),
         ];
       },
