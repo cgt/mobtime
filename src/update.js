@@ -192,10 +192,10 @@ export const update = (action, state) =>
           return index === firstConnectionIndex;
         }
 
-        const connectionFilterPredicate = (connection, index) =>
-          isConnectedToCurrentTimer(connection) && !isOwner(index);
-
-        const timerConnections = connections.filter(connectionFilterPredicate);
+        const timerConnections = connections.filter(
+          (connection, index) =>
+            isConnectedToCurrentTimer(connection) && !isOwner(index),
+        );
 
         return [
           {
