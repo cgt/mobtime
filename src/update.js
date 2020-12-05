@@ -174,10 +174,14 @@ export const update = (action, state) =>
           return doNothing();
         }
 
-        const connections = state.connections.map((connection, index) => ({
-          ...connection,
-          isOwner: firstConnectionIndex === index ? true : connection.isOwner,
-        }));
+        function applesauce(connection, index) {
+          return {
+            ...connection,
+            isOwner: firstConnectionIndex === index ? true : connection.isOwner,
+          };
+        }
+
+        const connections = state.connections.map(applesauce);
 
         const timerConnections = connections.filter(
           (c, index) => c.timerId === timerId && index !== firstConnectionIndex,
