@@ -188,14 +188,10 @@ export const update = (action, state) =>
           return connection.timerId === timerId;
         }
 
-        function isNotFirstConnectionForTimer(index) {
-          return !(index === firstConnectionIndex);
-        }
-
         function connectionFilterPredicate(connection, index) {
           return (
             isConnectedToCurrentTimer(connection) &&
-            isNotFirstConnectionForTimer(index)
+            !(index === firstConnectionIndex)
           );
         }
 
